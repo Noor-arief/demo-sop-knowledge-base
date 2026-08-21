@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOP & Knowledge Base Customer Service — Konteks Parking App (Contoh/Konsep)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#122A43; --navy-2:#1C3A57; --text:#28313C; --muted:#5B6570;
+  --bg:#FFFFFF; --bg-soft:#F5F7FA; --line:#E3E7EC; --teal:#0D7C82; --teal-soft:#E4F2F1;
+  --orange:#C2611F; --orange-soft:#FBEFE2;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg-soft);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.55;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+.banner{background:var(--orange-soft);color:var(--orange);text-align:center;font-size:13px;font-weight:600;padding:10px 16px;}
+header{background:var(--navy);color:#fff;padding:30px 0;}
+header h1{margin:0;font-size:21px;}
+header p{margin:4px 0 18px;font-size:13px;color:#B9C5D3;}
+.search-box{position:relative;max-width:520px;}
+.search-box input{
+  width:100%;padding:13px 16px 13px 42px;border-radius:10px;border:none;font-size:14.5px;font-family:'Inter',sans-serif;
+  outline:none;
+}
+.search-box .icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:15px;}
+main{padding:28px 0 60px;}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:26px;}
+@media(max-width:820px){.layout{grid-template-columns:1fr;}}
+.sidebar{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;height:fit-content;}
+.sidebar h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:4px 0 10px;}
+.sidebar-item{
+  display:flex;justify-content:space-between;padding:9px 10px;border-radius:8px;cursor:pointer;font-size:13.5px;font-weight:500;
+}
+.sidebar-item:hover{background:var(--bg-soft);}
+.sidebar-item.active{background:var(--teal-soft);color:var(--teal);font-weight:700;}
+.sidebar-item .count{color:var(--muted);font-size:12px;font-family:'IBM Plex Mono',monospace;}
+.sidebar-item.active .count{color:var(--teal);}
+.article-list{display:flex;flex-direction:column;gap:14px;}
+.article-card{
+  background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;transition:box-shadow .15s, transform .15s;
+}
+.article-card:hover{box-shadow:0 8px 20px rgba(18,42,67,0.07);transform:translateY(-2px);}
+.article-tag{display:inline-block;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--teal);background:var(--teal-soft);padding:3px 9px;border-radius:999px;margin-bottom:8px;}
+.article-title{font-size:15px;font-weight:700;color:var(--navy);margin:0 0 6px;}
+.article-desc{font-size:13.5px;color:var(--muted);margin:0;}
+.no-result{text-align:center;color:var(--muted);padding:60px 0;font-size:14px;}
+.escalation{margin-top:30px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px;}
+.escalation h2{font-size:16px;margin:0 0 4px;color:var(--navy);}
+.escalation p.sub{font-size:13px;color:var(--muted);margin:0 0 16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{text-align:left;color:var(--muted);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;padding:8px 10px;border-bottom:1px solid var(--line);}
+td{padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+.level-pill{font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--teal-soft);color:var(--teal);white-space:nowrap;}
+
+.overlay{position:fixed;inset:0;background:rgba(18,42,67,0.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:50;}
+.overlay.open{display:flex;}
+.modal{background:#fff;border-radius:14px;max-width:560px;width:100%;padding:28px;max-height:80vh;overflow-y:auto;}
+.modal .article-tag{margin-bottom:10px;}
+.modal h2{font-size:19px;margin:0 0 12px;color:var(--navy);}
+.modal p{font-size:14px;color:var(--text);margin:0 0 12px;}
+.modal ol, .modal ul{padding-left:20px;margin:0 0 12px;font-size:14px;}
+.modal li{margin-bottom:6px;}
+.close-btn{float:right;background:var(--bg-soft);border:none;border-radius:8px;padding:7px 12px;font-size:13px;cursor:pointer;color:var(--muted);}
+footer{text-align:center;padding:20px;font-size:12px;color:var(--muted);}
+</style>
+</head>
+<body>
+<div class="banner">⚠️ Proyek contoh/konsep, terinspirasi dari konteks industri smart parking — seluruh konten SOP di bawah ini fiktif/simulasi, bukan dokumen asli perusahaan mana pun.</div>
+
+<header>
+  <div class="wrap">
+    <h1>SOP & Knowledge Base Customer Service</h1>
+    <p>Konteks: Aplikasi Parkir Digital — cari SOP, FAQ, dan alur eskalasi</p>
+    <div class="search-box">
+      <span class="icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Cari SOP, FAQ, atau kata kunci...">
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="layout">
+    <div class="sidebar">
+      <h3>Kategori</h3>
+      <div id="sidebarList"></div>
+    </div>
+
+    <div>
+      <div class="article-list" id="articleList"></div>
+      <div class="no-result" id="noResult" style="display:none;">Tidak ada hasil yang cocok. Coba kata kunci lain.</div>
+
+      <div class="escalation">
+        <h2>Escalation Matrix</h2>
+        <p class="sub">Jalur eskalasi berdasarkan tingkat urgensi masalah</p>
+        <table>
+          <thead><tr><th>Level</th><th>Contoh Kasus</th><th>Eskalasi ke</th><th>Target Respon</th></tr></thead>
+          <tbody>
+            <tr><td><span class="level-pill">Level 1</span></td><td>Pertanyaan umum, cara reservasi/pembayaran</td><td>Agen CS</td><td>&lt; 15 menit</td></tr>
+            <tr><td><span class="level-pill">Level 2</span></td><td>Gagal bayar, selisih tarif standar</td><td>Team Lead CS</td><td>&lt; 2 jam</td></tr>
+            <tr><td><span class="level-pill">Level 3</span></td><td>Kendaraan tertahan di palang pintu, sensor gerbang rusak</td><td>CX Manager</td><td>&lt; 1 jam</td></tr>
+            <tr><td><span class="level-pill">Level 4</span></td><td>Insiden keamanan lahan parkir, isu hukum/media</td><td>Head of Operations</td><td>&lt; 30 menit</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>Knowledge base contoh untuk portofolio — dibangun dengan HTML/CSS/JavaScript, AI-assisted development. Konten bersifat simulasi.</footer>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<script>
+const articles = [
+  {id:1, cat:"faq", tag:"FAQ", title:"Bagaimana cara membuat reservasi slot parkir?", desc:"Langkah-langkah membantu pengguna reservasi sebelum sampai lokasi.",
+    body:`<p>Gunakan panduan berikut saat pengguna menanyakan cara reservasi:</p>
+    <ol><li>Buka aplikasi, pilih lokasi tujuan dan cek ketersediaan slot.</li>
+    <li>Pilih perkiraan jam kedatangan, lalu konfirmasi reservasi.</li>
+    <li>Pastikan pengguna menerima notifikasi konfirmasi — jika tidak muncul dalam 2 menit, minta cek koneksi lalu refresh halaman riwayat reservasi.</li>
+    <li>Jika slot tetap tidak tersimpan, eskalasi ke tim teknis dengan menyertakan waktu dan lokasi kejadian.</li></ol>`},
+  {id:2, cat:"faq", tag:"FAQ", title:"Kendaraan tidak bisa keluar dari lahan parkir, apa yang harus dilakukan?", desc:"Panduan cepat saat sensor gerbang tidak mendeteksi kendaraan.",
+    body:`<p>Ini adalah kasus prioritas tinggi karena melibatkan kendaraan yang tertahan secara fisik:</p>
+    <ol><li>Minta pengguna tetap tenang dan jangan memaksa palang terbuka manual.</li>
+    <li>Cek status transaksi pengguna di sistem — pastikan pembayaran sudah berhasil.</li>
+    <li>Jika pembayaran valid namun palang tidak terbuka, hubungi petugas lokasi (enforcer) melalui aplikasi internal untuk membuka manual.</li>
+    <li>Catat kejadian sebagai laporan gangguan sensor untuk tim teknis lokasi tersebut.</li></ol>`},
+  {id:3, cat:"sop", tag:"SOP", title:"SOP Penanganan Gagal Pembayaran", desc:"Prosedur standar saat transaksi pembayaran parkir gagal namun saldo terpotong.",
+    body:`<p>Prosedur standar (non-kasus khusus):</p>
+    <ol><li>Verifikasi bukti transaksi dari pengguna (screenshot atau riwayat di aplikasi).</li>
+    <li>Cek status transaksi di sistem pembayaran internal.</li>
+    <li>Jika saldo terpotong namun transaksi gagal tercatat, ajukan reversal, target proses 1x24 jam.</li>
+    <li>Kirim notifikasi ke pengguna begitu reversal diajukan dan saat selesai diproses.</li></ol>`},
+  {id:4, cat:"sop", tag:"SOP", title:"SOP Perpanjangan Membership yang Gagal", desc:"Alur penanganan saat perpanjangan subscription otomatis tidak berhasil.",
+    body:`<p>Langkah penanganan membership gagal diperpanjang:</p>
+    <ol><li>Cek metode pembayaran tersimpan pengguna — pastikan masih valid.</li>
+    <li>Jika kartu/metode pembayaran bermasalah, arahkan pengguna memperbarui metode pembayaran.</li>
+    <li>Berikan grace period singkat agar pengguna tidak dikenakan tarif reguler saat proses perbaikan berlangsung.</li>
+    <li>Laporkan pola kegagalan berulang ke tim produk untuk evaluasi sistem auto-charge.</li></ol>`},
+  {id:5, cat:"komplain", tag:"Penanganan Komplain", title:"Menangani pengguna yang marah karena kendaraan tertahan", desc:"Panduan nada bicara dan langkah de-eskalasi untuk situasi darurat.",
+    body:`<p>Prinsip utama saat menghadapi pengguna dalam situasi darurat (kendaraan tertahan):</p>
+    <ul><li>Prioritaskan solusi cepat di atas penjelasan panjang — pengguna sedang di lokasi dan butuh tindakan segera.</li>
+    <li>Hubungi petugas lokasi secara paralel sambil tetap berkomunikasi dengan pengguna.</li>
+    <li>Setelah masalah selesai, baru jelaskan penyebab dan tindak lanjut pencegahan.</li>
+    <li>Eskalasi ke Level 3/4 jika situasi tidak terselesaikan dalam 15 menit.</li></ul>`},
+  {id:6, cat:"komplain", tag:"Penanganan Komplain", title:"Pengguna komplain tarif yang tertagih tidak sesuai", desc:"Langkah verifikasi saat ada dugaan selisih tarif parkir.",
+    body:`<p>Langkah verifikasi selisih tarif:</p>
+    <ol><li>Cek waktu masuk dan keluar tercatat di sistem vs klaim pengguna.</li>
+    <li>Jika ditemukan selisih waktu akibat keterlambatan sinkronisasi sensor, sesuaikan tagihan dan proses refund selisih.</li>
+    <li>Jika tarif sudah sesuai kebijakan, jelaskan rincian perhitungan secara transparan ke pengguna.</li></ol>`},
+  {id:7, cat:"respon", tag:"Response Guidelines", title:"Template respon awal untuk kasus kendaraan tertahan", desc:"Contoh kalimat pembuka untuk situasi darurat/prioritas tinggi.",
+    body:`<p>Contoh kalimat pembuka yang bisa digunakan (sesuaikan konteks):</p>
+    <p><i>"Halo [Nama], mohon tetap di lokasi ya, saya bantu hubungi petugas parkir sekarang juga untuk membuka aksesnya."</i></p>
+    <p>Prioritaskan kecepatan respon di atas kelengkapan kalimat pada situasi darurat.</p>`},
+  {id:8, cat:"respon", tag:"Response Guidelines", title:"Nada bicara di channel chat vs telepon", desc:"Perbedaan gaya komunikasi antar channel dukungan.",
+    body:`<p>Chat: boleh lebih singkat namun tetap sopan, prioritaskan instruksi actionable.</p>
+    <p>Telepon: gunakan nada suara tenang, konfirmasi ulang lokasi dan nomor kendaraan secara verbal sebelum menutup panggilan pada kasus darurat.</p>`},
+];
+
+const categories = [
+  {id:"all", name:"Semua"},
+  {id:"faq", name:"FAQ"},
+  {id:"sop", name:"SOP"},
+  {id:"komplain", name:"Penanganan Komplain"},
+  {id:"respon", name:"Response Guidelines"},
+];
+
+let activeCat = "all";
+
+function countFor(catId){
+  if(catId==="all") return articles.length;
+  return articles.filter(a=>a.cat===catId).length;
+}
+
+function renderSidebar(){
+  document.getElementById('sidebarList').innerHTML = categories.map(c => `
+    <div class="sidebar-item ${c.id===activeCat?'active':''}" data-cat="${c.id}">
+      <span>${c.name}</span><span class="count">${countFor(c.id)}</span>
+    </div>
+  `).join('');
+  document.querySelectorAll('.sidebar-item').forEach(el=>{
+    el.addEventListener('click', ()=>{ activeCat = el.dataset.cat; renderSidebar(); renderArticles(); });
+  });
+}
+
+function renderArticles(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  let list = articles.filter(a => activeCat==="all" || a.cat===activeCat);
+  if(q){
+    list = list.filter(a => (a.title+a.desc).toLowerCase().includes(q));
+  }
+  const container = document.getElementById('articleList');
+  document.getElementById('noResult').style.display = list.length ? 'none' : 'block';
+  container.innerHTML = list.map(a => `
+    <div class="article-card" data-id="${a.id}">
+      <span class="article-tag">${a.tag}</span>
+      <div class="article-title">${a.title}</div>
+      <p class="article-desc">${a.desc}</p>
+    </div>
+  `).join('');
+  document.querySelectorAll('.article-card').forEach(el=>{
+    el.addEventListener('click', ()=> openModal(parseInt(el.dataset.id)));
+  });
+}
+
+function openModal(id){
+  const a = articles.find(x=>x.id===id);
+  document.getElementById('modalContent').innerHTML = `
+    <button class="close-btn" id="closeModal">Tutup ✕</button>
+    <span class="article-tag">${a.tag}</span>
+    <h2>${a.title}</h2>
+    ${a.body}
+  `;
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('closeModal').addEventListener('click', closeModal);
+}
+function closeModal(){ document.getElementById('overlay').classList.remove('open'); }
+document.getElementById('overlay').addEventListener('click', (e)=>{ if(e.target.id==='overlay') closeModal(); });
+
+document.getElementById('searchInput').addEventListener('input', renderArticles);
+
+renderSidebar();
+renderArticles();
+</script>
+</body>
+</html>
